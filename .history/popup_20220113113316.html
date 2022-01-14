@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Bootstrap 的 CSS 文件 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LY6QZQpYtqgQLJeUeh2disXkUUa+fRYfq/3dxdpkU5PQZUCqg/BK4wrhQ9idOojx" crossorigin="anonymous">
+    <title>Document</title>
+    </head>
+    <body>
+        
+        <div class="container" style="width: 390px; height: 500px">
+            <div class="row"><a href="http://121.5.175.153:8090/" target="_blank">我的导航</a></div>
+            <br />
+            <hr />
+            <div  class="row" id="curUrl" style="width: 90%;word-break: break-all;"></div>
+            <div  class="row">
+                类型<select id="urlType">
+                    <option>请选择</option>
+                </select>
+            </div>
+            <div><button id="btn_confirm">添加</button></div>
+            <div><button onclick="addType()">添加类型</button></div>
+
+                <!-- 选项 1：包含 Popper 的 Bootstrap 集成包 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-3JyvMmfSMpWbSPyCjNwU5lHJFeswLerSwlOGCGjyuhQ+HKQNQKCbIzEgGTP1MfyY" crossorigin="anonymous"></script>
+    <script src="popup.js"></script>
+        </div>
+    </body>
+</html>
