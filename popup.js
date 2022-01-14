@@ -80,7 +80,7 @@ addUrlBtn.onclick = function () {
     submitData.url = curUrl
     submitData.name = urlName
 
-    var url = "http://121.5.175.153:8080/reType"
+    var url = "http://121.5.175.153:8080/reUrl"
     // var url = "http://localhost:8080/reUrl"
     var options = {
         // 如果后台使用@RequestBody修饰接收参数， content-type 一定不能少，否则会报错
