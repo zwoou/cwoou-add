@@ -1,6 +1,0 @@
-
-
-class Fetcher {
-
-}
-export de
