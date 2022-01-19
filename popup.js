@@ -1,3 +1,6 @@
+import Fetcher from "./js/Fetcher.js"
+import * as UrlConstant from "./js/UrlConstant.js"
+
 chrome.tabs.query({ active: true, lastFocusedWindow: true }, function (tabs) {
     var url = tabs[0].url
     console.log("当前url:" + url)
@@ -7,29 +10,14 @@ chrome.tabs.query({ active: true, lastFocusedWindow: true }, function (tabs) {
     document.getElementById("urlName").value = urlName
 })
 
-var options = {
-    // 如果后台使用@RequestBody修饰接收参数， content-type 一定不能少，否则会报错
-    headers: {
-        "content-type": "application/json",
-    },
-    method: "GET", // *GET, POST, PUT, DELETE, etc.
-    mode: "cors", // no-cors, cors, *same-origin,
-}
-var url = "http://121.5.175.153:8080/reTypeList"
-fetch(url, options)
-    .then((res) => {
-        console.log(res)
-        return res.json()
+Fetcher.getData(UrlConstant.RE_TYPE_LIST_URL).then((data) => {
+    console.log("typeList :", data)
+    // 显示类型
+    let urlType = document.getElementById("urlType")
+    data.map((item, index) => {
+        return urlType.options.add(new Option(item.typeName, item.id))
     })
-    .then((response) => {
-        console.log(response)
-        // 显示类型
-        let urlType = document.getElementById("urlType")
-        response.map((item, index) => {
-            return urlType.options.add(new Option(item.typeName, item.id))
-        })
-    })
-    .catch((error) => console.log(error))
+})
 
 var addTypeBtn = document.getElementById("addType")
 addTypeBtn.onclick = function () {
