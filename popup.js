@@ -2,12 +2,15 @@ import Fetcher from "./js/Fetcher.js"
 import * as UrlConstant from "./js/UrlConstant.js"
 
 chrome.tabs.query({ active: true, lastFocusedWindow: true }, function (tabs) {
-    var url = tabs[0].url
+    let { url, title, favIconUrl } = tabs[0]
     console.log("当前url:" + url)
-    console.log("当前选项卡：" + tabs[0].title)
-    let urlName = tabs[0].title
+    console.log("当前选项卡：" + title)
+    console.log("当前：favIconUrl" + favIconUrl)
+    if (url.length > 254) {
+        url = url.split("?")[0]
+    }
     document.getElementById("curUrl").value = url
-    document.getElementById("urlName").value = urlName
+    document.getElementById("urlName").value = title
 })
 
 Fetcher.getData(UrlConstant.RE_TYPE_LIST_URL).then((data) => {
@@ -25,25 +28,11 @@ addTypeBtn.onclick = function () {
     console.log("typeName：" + typeName)
     let submitData = {}
     submitData.typeName = typeName
-    var url = "http://121.5.175.153:8080/reType"
-    // var url = "http://localhost:8080/reType"
-    var options = {
-        // 如果后台使用@RequestBody修饰接收参数， content-type 一定不能少，否则会报错
-        headers: {
-            "content-type": "application/json",
-        },
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, cors, *same-origin,
-        body: JSON.stringify(submitData),
-    }
-    fetch(url, options)
-        .then((res) => {
-            return res.json()
-        })
-        .then((response) => {
-            console.log(response)
-            console.log("addType返回：" + response.code)
-            alert(response.msg)
+    Fetcher.postData(UrlConstant.RE_TYPE_URL, submitData)
+        .then((data) => {
+            console.log(data)
+            console.log("addType返回：" + data.code)
+            alert(data.msg)
             window.close()
         })
         .catch((error) => {
@@ -68,30 +57,15 @@ addUrlBtn.onclick = function () {
     submitData.url = curUrl
     submitData.name = urlName
 
-    var url = "http://121.5.175.153:8080/reUrl"
-    // var url = "http://localhost:8080/reUrl"
-    var options = {
-        // 如果后台使用@RequestBody修饰接收参数， content-type 一定不能少，否则会报错
-        headers: {
-            "content-type": "application/json",
-        },
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, cors, *same-origin,
-        body: JSON.stringify(submitData),
-    }
-    fetch(url, options)
-        .then((res) => {
-            return res.json()
-        })
+    Fetcher.postData(UrlConstant.RE_URL_URL, submitData)
         .then((response) => {
             console.log(response)
-            console.log("addType返回：" + response.code)
+            console.log("addURL返回：" + response.code)
             alert(response.msg)
             window.close()
         })
         .catch((error) => {
             console.log(error)
             alert("系统异常")
-            window.close()
         })
 }
