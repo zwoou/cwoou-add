@@ -29,7 +29,6 @@ addTypeBtn.onclick = function () {
     let submitData = {}
     submitData.typeName = typeName
     Fetcher.postData(UrlConstant.RE_TYPE_URL, submitData)
-        .then((res) => res.json())
         .then((data) => {
             console.log(data)
             console.log("addType返回：" + data.code)
@@ -59,7 +58,6 @@ addUrlBtn.onclick = function () {
     submitData.name = urlName
 
     Fetcher.postData(UrlConstant.RE_URL_URL, submitData)
-        .then((res) => res.json())
         .then((data) => {
             console.log(data)
             console.log("addURL返回：" + data.code)

@@ -1,10 +1,10 @@
 export default class Fetcher {
-    static postData(url = "", data = {}) {
+    static async postData(url = "", data = {}) {
         console.log("请求参数:", data)
 
         // Default options are marked with *
 
-        var res = fetch(url, {
+        const response = await fetch(url, {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             mode: "cors", // no-cors, *cors, same-origin
             headers: {
@@ -13,9 +13,8 @@ export default class Fetcher {
             },
             body: JSON.stringify(data), // body data type must match "Content-Type" header
         })
-        return res
+        return response.json()
     }
-
     static getData(url = "") {
         // Default options are marked with *
         return fetch(url, {
