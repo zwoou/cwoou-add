@@ -1,7 +1,7 @@
 {
     "name": "我的收藏",
-    "version": "1.1",
-    "description": "收藏链接.",
+    "version": "1.10",
+    "description": "收藏链接",
     "manifest_version": 3,
     "background": {
         "service_worker": "background.js"

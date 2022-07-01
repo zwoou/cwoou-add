@@ -2,15 +2,18 @@ import Fetcher from "./js/Fetcher.js"
 import * as UrlConstant from "./js/UrlConstant.js"
 
 chrome.tabs.query({ active: true, lastFocusedWindow: true }, function (tabs) {
-    let { url, title, favIconUrl } = tabs[0]
-    console.log("当前url:" + url)
-    console.log("当前选项卡：" + title)
-    console.log("当前：favIconUrl" + favIconUrl)
-    if (url.length > 254) {
-        url = url.split("?")[0]
+    if (tabs != null && tabs.length > 0) {
+        console.log("tabs:" + tabs[0])
+        let { url, title, favIconUrl } = tabs[0]
+        console.log("当前url:" + url)
+        console.log("当前选项卡：" + title)
+        console.log("当前：favIconUrl" + favIconUrl)
+        if (url.length > 254) {
+            url = url.split("?")[0]
+        }
+        document.getElementById("curUrl").value = url
+        document.getElementById("urlName").value = title
     }
-    document.getElementById("curUrl").value = url
-    document.getElementById("urlName").value = title
 })
 
 Fetcher.getData(UrlConstant.RE_TYPE_LIST_URL).then((data) => {
@@ -41,7 +44,7 @@ addTypeBtn.onclick = function () {
             window.close()
         })
 }
-
+// 添加
 var addUrlBtn = document.getElementById("btn_confirm")
 addUrlBtn.onclick = function () {
     let curUrl = document.getElementById("curUrl").value
@@ -57,15 +60,11 @@ addUrlBtn.onclick = function () {
     submitData.url = curUrl
     submitData.name = urlName
 
-    Fetcher.postData(UrlConstant.RE_URL_URL, submitData)
-        .then((data) => {
-            console.log(data)
-            console.log("addURL返回：" + data.code)
-            alert(data.msg)
-            window.close()
-        })
-        .catch((error) => {
-            console.log(error)
-            alert("系统异常" + error)
-        })
+    Fetcher.postDataTwo(UrlConstant.RE_URL_URL, submitData, addUrlBtn_callBack)
+}
+let addUrlBtn_callBack = (data) => {
+    console.log(data)
+    console.log("addURL返回：" + data.code)
+    alert(data.msg)
+    window.close()
 }

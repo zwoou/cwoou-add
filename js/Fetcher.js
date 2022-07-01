@@ -1,9 +1,7 @@
 export default class Fetcher {
     static async postData(url = "", data = {}) {
         console.log("请求参数:", data)
-
         // Default options are marked with *
-
         const response = await fetch(url, {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             mode: "cors", // no-cors, *cors, same-origin
@@ -14,6 +12,30 @@ export default class Fetcher {
             body: JSON.stringify(data), // body data type must match "Content-Type" header
         })
         return response.json()
+    }
+
+    static postDataTwo(url = "", data = {}, callBack) {
+        console.log("请求参数:", data)
+        // Default options are marked with *
+        fetch(url, {
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            mode: "cors", // no-cors, *cors, same-origin
+            headers: {
+                "Content-Type": "application/json",
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify(data), // body data type must match "Content-Type" header
+        })
+            .then((response) => {
+                const contentType = response.headers.get("content-type")
+                if (!contentType || !contentType.includes("application/json")) {
+                    throw new TypeError("Oops, we haven't got JSON!")
+                }
+                return response.json()
+            })
+            .then((data) => {
+                callBack(data)
+            })
     }
     static getData(url = "") {
         // Default options are marked with *
