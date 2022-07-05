@@ -25,15 +25,13 @@ export default class Fetcher {
                 // 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: JSON.stringify(data), // body data type must match "Content-Type" header
-        })
-            .then((response) => {
+        }).then((response) => {
                 const contentType = response.headers.get("content-type")
                 if (!contentType || !contentType.includes("application/json")) {
                     throw new TypeError("Oops, we haven't got JSON!")
                 }
                 return response.json()
-            })
-            .then((data) => {
+            }).then((data) => {
                 callBack(data)
             })
     }
