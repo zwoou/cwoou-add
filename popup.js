@@ -45,26 +45,64 @@ addTypeBtn.onclick = function () {
         })
 }
 // 添加
-var addUrlBtn = document.getElementById("btn_confirm")
-addUrlBtn.onclick = function () {
-    let curUrl = document.getElementById("curUrl").value
-    console.log("url:" + curUrl)
-    // urlType
-    let obj = document.getElementById("urlType")
-    let index = obj.selectedIndex
-    let urlType = obj.options[index].value
-    // urlName
-    let urlName = document.getElementById("urlName").value
-    let submitData = {}
-    submitData.type = urlType
-    submitData.url = curUrl
-    submitData.name = urlName
+// var addUrlBtn = document.getElementById("btn_confirm")
+// addUrlBtn.onclick = function () {
+//     let curUrl = document.getElementById("curUrl").value
+//     console.log("url:" + curUrl)
+//     // urlType
+//     let obj = document.getElementById("urlType")
+//     let index = obj.selectedIndex
+//     let urlType = obj.options[index].value
+//     // urlName
+//     let urlName = document.getElementById("urlName").value
+//     let submitData = {}
+//     submitData.type = urlType
+//     submitData.url = curUrl
+//     submitData.name = urlName
 
-    Fetcher.postDataTwo(UrlConstant.RE_URL_URL, submitData, addUrlBtn_callBack)
-}
-let addUrlBtn_callBack = (data) => {
-    console.log(data)
-    console.log("addURL返回：" + data.code)
-    alert(data.msg)
-    window.close()
-}
+//     Fetcher.postDataTwo(UrlConstant.RE_URL_URL, submitData, addUrlBtn_callBack)
+// }
+// let addUrlBtn_callBack = (data) => {
+//     console.log(data)
+//     console.log("addURL返回：" + data.code)
+//     alert(data.msg)
+//     window.close()
+// }
+
+$(document).ready(function(){
+    $("#btn_confirm").click(function(){
+        let curUrl = document.getElementById("curUrl").value
+        console.log("url:" + curUrl)
+        // urlType
+        let obj = document.getElementById("urlType")
+        let index = obj.selectedIndex
+        let urlType = obj.options[index].value
+        // urlName
+        let urlName = document.getElementById("urlName").value
+        let submitData = {}
+        submitData.type = urlType
+        submitData.url = curUrl
+        submitData.name = urlName
+        $.ajax({
+            type: "POST",
+            url: UrlConstant.RE_URL_URL,
+            async:false,
+            data: JSON.stringify(submitData),
+            contentType: "application/json;charset=utf-8",
+            success: function(data,status){
+                console.log("addURL返回：" + data.code)
+                alert(data.msg)
+                window.close()
+            },
+            error: function(){
+                alert("系统错误");
+            }
+    })
+
+
+
+    });
+
+
+
+})

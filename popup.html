@@ -13,22 +13,25 @@
         <div class="container" style="width: 390px; height: 500px; margin: 10px">
             <div class="row"><a href="http://121.5.175.153:8090/" target="_blank">我的导航</a></div>
             <hr />
-            <form>
-                <div class="form-group" style="word-break: break-all">
-                    <label for="curUrl" class="form-label">地址URL</label>
-                    <textarea class="form-control" id="curUrl" rows="3"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="urlType" class="form-label">类型</label>
-                    <select id="urlType" class="form-select">
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="urlName" class="form-label">网站名</label>
-                    <input type="text" id="urlName" class="form-control" />
-                </div>
-                <button id="btn_confirm" class="btn btn-primary mt-2">添加</button>
-            </form>
+            <div style="padding: 10px;">
+                <form>
+                    <div class="form-group" style="word-break: break-all">
+                        <label for="curUrl" class="form-label">地址URL</label>
+                        <textarea class="form-control" id="curUrl" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="urlType" class="form-label">类型</label>
+                        <select id="urlType" class="form-select">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="urlName" class="form-label">网站名</label>
+                        <input type="text" id="urlName" class="form-control" />
+                    </div>
+                    <button id="btn_confirm" class="btn btn-primary mt-2">添加</button>
+                </form>
+           </div>
+
             <div class="form-group row mt-4">
                 <label for="typeName" class="form-label">类型名称</label>
                 <input type="text" class="form-control" id="typeName" placeholder="" />
@@ -40,6 +43,7 @@
 
             <!-- 选项 1：包含 Popper 的 Bootstrap 集成包 -->
             <script src="/js/bootstrap.bundle.min.js"></script>
+            <script src="/js/jquery-3.6.0.min.js"></script>
             <script type="module" src="js/Fetcher.js"></script>
             <script type="module" src="js/UrlConstant.js"></script>
 

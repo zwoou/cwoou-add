@@ -1,6 +1,6 @@
 {
     "name": "我的收藏",
-    "version": "1.10",
+    "version": "1.12",
     "description": "收藏链接",
     "manifest_version": 3,
     "background": {
